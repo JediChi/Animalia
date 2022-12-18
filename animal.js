@@ -176,29 +176,43 @@ fis.fishProperties();
 fis.coldBlooded();
 
 class Amphibians extends Vertebrates {
+  #livesInDualHabitats;
+  #isEctothermic;
   constructor(livesInDualHabitats, isEctothermic, name, gender) {
     super(name, gender);
-    this.livesInDualHabitats = livesInDualHabitats;
-    this.isEctothermic = isEctothermic;
+    this.#livesInDualHabitats = livesInDualHabitats;
+    this.#isEctothermic = isEctothermic;
   }
-
-  livesInDualHabitats = true;
-  isEctothermic = true;
-  spawning() {}
+  attributes() {
+    if (this.#livesInDualHabitats = true) {
+      console.log("Amphibians lives in dual habitats. Some live in water, others live on land");
+    }
+    if (this.#isEctothermic = true) {
+      console.log("Amphibians are meant to be ectothermic");
+    }
+  }
+  
+  spawning() {
+    console.log("The method amphibians give birth is known as spawning");
+  }
   swimming() {}
 }
+const amph = new Amphibians();
+amph.attributes();
+amph.spawning();
 
 class Reptiles extends Vertebrates {
+  #hasGlands;
+  #isTetrapod;
+  #hasScales;
   constructor(hasGlands, isTetrapod, hasScales, name, gender) {
     super(name, gender);
-    this.hasGlands = hasGlands;
-    this.isTetrapod = isTetrapod;
-    this.hasScales = hasScales;
+    this.#hasGlands = hasGlands;
+    this.#isTetrapod = isTetrapod;
+    this.#hasScales = hasScales;
   }
 
-  hasGlands = false;
-  isTetrapod = true;
-  hasScales = true;
+  
 
   coldBlooded() {
     console.log("Reptiles are cold blooded");
