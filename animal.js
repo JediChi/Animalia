@@ -205,9 +205,9 @@ class Reptiles extends Vertebrate {
   #hasScales;
   constructor(name, gender) {
     super({name, gender});
-    this.#hasGlands == true;
-    this.#isTetrapod == true;
-    this.#hasScales == true;
+    this.#hasGlands = true;
+    this.#isTetrapod = true;
+    this.#hasScales = true;
   }
 
   
