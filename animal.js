@@ -1,8 +1,9 @@
 // const prompt = require("prompt-sync");
 
-class Animals {
+class Animal {
   constructor(name, gender) {
-    if (this.constructor === Animals) {
+    if (this.constructor === Animal) {
+      throw new Error("This class cannot be implemented")
     }
     this.name = name;
     this.gender = gender;
@@ -12,37 +13,38 @@ class Animals {
   gender = "Animals can either be a male or female";
 
   eat() {
+    throw new Error("Please implement this method in the inherited classes")
   }
   reproduce() {
-    console.log("Animals give birth to younger ones");
+    throw new Error("Please implement this method in the inherited classes")
   }
   growth() {
-    console.log("Animals do grow");
+    throw new Error("Please implement this method in the inherited classes")
   }
   breathe() {
-    console.log("Animals breathe through the nostrils");
+    throw new Error("Please implement this method in the inherited classes")
   }
 }
 
-class Invertebrates extends Animals {
+class Invertebrate extends Animal {
   #isMulticellular;
   #hasExoskeleton;
   #hasNoCellWall;
-  constructor(name, gender, isMulticellular, hasExoskeleton, hasNoCellWall) {
-    super(name, gender);
-    (this.#isMulticellular = isMulticellular),
-      (this.#hasExoskeleton = hasExoskeleton),
-      (this.#hasNoCellWall = hasNoCellWall);
+  constructor(params) {
+    super(params.name, params.gender);
+    this.#isMulticellular = true;
+    this.#hasExoskeleton = true;
+    this.#hasNoCellWall = true;
   }
   properties () {
-    if (this.#isMulticellular = true) {
-      console.log("Ivertebrates are multicellular");
+    if (this.#isMulticellular) {
+      console.log("Invertebrates are multicellular");
     }
-    if (this.#hasExoskeleton = true) {
-      console.log("Ivertebrates have exoskeletons");
+    if (this.#hasExoskeleton) {
+      console.log("Invertebrates have exoskeletons");
     }
-    if (this.#hasNoCellWall = true) {
-      console.log("Ivertebrates have no cell wall");
+    if (this.#hasNoCellWall) {
+      console.log("Invertebrates have no cell wall");
     }
   }
 
@@ -56,21 +58,21 @@ class Invertebrates extends Animals {
     );
   }
 }
-const invertebrate = new Invertebrates();
+const invertebrate = new Invertebrate({name: 'Invertebrate', gender: 'Any'});
 invertebrate.move();
 invertebrate.properties();
 invertebrate.eat();
 
-class Vertebrates extends Animals {
+class Vertebrate extends Animal {
   #isUnicellular;
   #hasEndoskeleton;
   #hasACellWall;
-  constructor(name, gender, isUnicellular, hasEndoskeleton, hasACellWall) {
-    super(name, gender);
+  constructor(params) {
+    super(params.name, params.gender);
     
-    this.#isUnicellular = isUnicellular;
-    this.#hasEndoskeleton = hasEndoskeleton;
-    this.#hasACellWall = hasACellWall;
+    this.#isUnicellular = true;
+    this.#hasEndoskeleton = true;
+    this.#hasACellWall = true;
   }
   eat() {
     console.log("Vertebrates eat mainly by chewing");
@@ -79,10 +81,10 @@ class Vertebrates extends Animals {
   
 
   properties() {
-    if (this.#isUnicellular = true) {
+    if (this.#isUnicellular) {
       console.log("All vertebrates are unicellular");
     }
-    if (this.#hasEndoskeleton = true) {
+    if (this.#hasEndoskeleton) {
       console.log("All vertebrates have endoskeleton");
     }
   }
@@ -90,39 +92,35 @@ class Vertebrates extends Animals {
     console.log("All vertebrates reproduce sexually");
   }
 }
-const vertebrate = new Vertebrates();
+const vertebrate = new Vertebrate({name: 'Vertebrates', gender: 'Any'});
 vertebrate.sexualReproduction();
 vertebrate.properties();
 vertebrate.eat();
 
-class Anthroproda extends Invertebrates {
+class Anthroproda extends Invertebrate {
   #hasJointedAppendages;
   #isSegmented;
   #isBilaterallySegmented;
   #hasOpenCirculatorySystem;
   constructor(
     name,
-    gender,
-    hasJointedAppendages,
-    isSegmented,
-    isBilaterallySegmented,
-    hasOpenCirculatorySystem
+    gender
   ) {
-    super(name, gender);
-    this.#hasJointedAppendages = hasJointedAppendages;
-    this.#isSegmented = isSegmented;
-    this.#isBilaterallySegmented = isBilaterallySegmented;
-    this.#hasOpenCirculatorySystem = hasOpenCirculatorySystem;
+    super({name, gender});
+    this.#hasJointedAppendages = true;
+    this.#isSegmented = true;
+    this.#isBilaterallySegmented = true;
+    this.#hasOpenCirculatorySystem = true;
   }
 
   properties() {
-    if (this.#hasJointedAppendages = true) {
+    if (this.#hasJointedAppendages) {
       console.log("Anthropods like coakroaches have jointed appendages");
     }
-    if (this.#isSegmented = true) {
+    if (this.#isSegmented) {
       console.log("Anthropods like coakroaches are segmented");
     }
-    if (this.#isBilaterallySegmented = true) {
+    if (this.#isBilaterallySegmented) {
       console.log("Anthropods are bilaterally segmented");
     }
   }
@@ -141,27 +139,27 @@ class Anthroproda extends Invertebrates {
 
   sexualReproduction() {}
 }
-const anthropods = new Anthroproda();
+const anthropods = new Anthroproda('Spider', 'Male');
 anthropods.bite();
 anthropods.properties();
 anthropods.creep();
 anthropods.coldBlooded();
 
-class Fish extends Vertebrates {
+class Fish extends Vertebrate {
   #hasFins;
   #hasGills;
   #hasScales;
-  constructor(hasFins, hasGills, hasScales, name, gender) {
-    super(name, gender);
-    this.#hasFins = hasFins;
-    this.#hasGills = hasGills;
-    this.#hasScales = hasScales;
+  constructor(name, gender) {
+    super({name, gender});
+    this.#hasFins = true;
+    this.#hasGills = true;
+    this.#hasScales = true;
   }
   coldBlooded() {
     console.log("Fish are cold blooded");
   }
     fishProperties() {
-      if (this.#hasFins = true) {
+      if (this.#hasFins) {
         console.log("All fishes have fins")
       }
     }
@@ -170,24 +168,24 @@ class Fish extends Vertebrates {
     console.log("Fishes swim");
   }
 }
-const fis = new Fish();
+const fis = new Fish('Tilapia', 'Female');
 fis.swim();
 fis.fishProperties();
 fis.coldBlooded();
 
-class Amphibians extends Vertebrates {
+class Amphibians extends Vertebrate {
   #livesInDualHabitats;
   #isEctothermic;
-  constructor(livesInDualHabitats, isEctothermic, name, gender) {
-    super(name, gender);
-    this.#livesInDualHabitats = livesInDualHabitats;
-    this.#isEctothermic = isEctothermic;
+  constructor(name, gender) {
+    super({name, gender});
+    this.#livesInDualHabitats = true;
+    this.#isEctothermic = true;
   }
   attributes() {
-    if (this.#livesInDualHabitats = true) {
+    if (this.#livesInDualHabitats) {
       console.log("Amphibians lives in dual habitats. Some live in water, others live on land");
     }
-    if (this.#isEctothermic = true) {
+    if (this.#isEctothermic) {
       console.log("Amphibians are meant to be ectothermic");
     }
   }
@@ -197,19 +195,19 @@ class Amphibians extends Vertebrates {
   }
   swimming() {}
 }
-const amph = new Amphibians();
+const amph = new Amphibians('Frog', 'Male');
 amph.attributes();
 amph.spawning();
 
-class Reptiles extends Vertebrates {
+class Reptiles extends Vertebrate {
   #hasGlands;
   #isTetrapod;
   #hasScales;
-  constructor(hasGlands, isTetrapod, hasScales, name, gender) {
-    super(name, gender);
-    this.#hasGlands = hasGlands;
-    this.#isTetrapod = isTetrapod;
-    this.#hasScales = hasScales;
+  constructor(name, gender) {
+    super({name, gender});
+    this.#hasGlands == true;
+    this.#isTetrapod == true;
+    this.#hasScales == true;
   }
 
   
@@ -222,20 +220,20 @@ class Reptiles extends Vertebrates {
   }
   burrow() {}
 }
-const reptile = new Reptiles();
+const reptile = new Reptiles('Snake', 'Female');
 reptile.creep();
 reptile.coldBlooded();
 
 
-class Aves extends Vertebrates {
+class Aves extends Vertebrate {
   #hasWings;
   #hasFlightMuscles;
   #hasBeak;
-  constructor(hasWings, hasFlightMuscles, hasBeak, name, gender) {
-    super(name, gender);
-    this.#hasWings = hasWings;
-    this.#hasFlightMuscles = hasFlightMuscles;
-    this.#hasBeak = hasBeak;
+  constructor(name, gender) {
+    super({name, gender});
+    this.#hasWings = true;
+    this.#hasFlightMuscles = true;
+    this.#hasBeak = true;
   }
 
   warmBlooded() {
@@ -247,29 +245,29 @@ class Aves extends Vertebrates {
   }
   perch() {}
 }
-const ave = new Aves();
+const ave = new Aves('Bird', 'Male');
 ave.fly();
 ave.warmBlooded()
 
-class Mammals extends Vertebrates {
+class Mammal extends Vertebrate {
   #hasHairOrFur;
   #hasMammaryGlands;
   #hasSweatGlands;
-  constructor(hasHairOrFur, hasMammaryGlands, hasSweatGlands, name, gender) {
-    super(name, gender);
-    this.#hasHairOrFur = hasHairOrFur;
-    this.#hasMammaryGlands = hasMammaryGlands;
-    this.#hasSweatGlands = hasSweatGlands;
+  constructor(name, gender) {
+    super({name, gender});
+    this.#hasHairOrFur = true;
+    this.#hasMammaryGlands = true;
+    this.#hasSweatGlands = true;
   }
 
   MammalsProperties() {
-    if (this.#hasHairOrFur = true) {
+    if (this.#hasHairOrFur) {
       console.log("Mammals have either hair or fur");
     }
-    if (this.#hasMammaryGlands = true) {
+    if (this.#hasMammaryGlands) {
       console.log("Mammals have mammary glands for feeding their young");
     }
-    if (this.#hasSweatGlands = true) {
+    if (this.#hasSweatGlands) {
       console.log("Mammals have sweat glands");
     }
   }
@@ -284,7 +282,7 @@ class Mammals extends Vertebrates {
   hop() {}
 }
 
-const mammal = new Mammals();
+const mammal = new Mammal('Human', 'Male');
 mammal.walk();
 mammal.MammalsProperties();
 mammal.warmBlooded();
